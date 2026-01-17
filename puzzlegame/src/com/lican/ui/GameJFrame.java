@@ -34,8 +34,12 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
     JMenuItem replayItem = new JMenuItem("重新游戏");
     JMenuItem reloginItem = new JMenuItem("重新登陆");
     JMenuItem closeItem = new JMenuItem("关闭游戏");
-
     JMenuItem accountItem = new JMenuItem("公众号");
+
+    //重新游戏menu中的条目
+    JMenuItem girl = new JMenuItem("美女");
+    JMenuItem animal = new JMenuItem("动物");
+    JMenuItem sport = new JMenuItem("运动");
 
     public GameJFrame(){
         //初始化界面
@@ -85,7 +89,7 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
 
         if(victory()){
             //显示胜利的图标
-            JLabel winJLabel = new JLabel(new ImageIcon("C:\\Users\\86188\\Desktop\\java\\Project\\PuzzleGame\\PuzzleGame\\image\\win.png"));
+            JLabel winJLabel = new JLabel(new ImageIcon("puzzlegame\\image\\win.png"));
             winJLabel.setBounds(203,283,197,73);
             this.getContentPane().add(winJLabel);
         }
@@ -127,18 +131,26 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
         //创建菜单上面的两个选项（功能，关于我们）
         JMenu functionJMenu = new JMenu("功能");
         JMenu aboutJMenu = new JMenu("关于我们");
+        //创建更换图片
+        JMenu changeImage = new JMenu("更换图片");
 
 
         //将每一个选项下面的条目添加到选项中
+        functionJMenu.add(changeImage);
         functionJMenu.add(replayItem);
         functionJMenu.add(reloginItem);
         functionJMenu.add(closeItem);
 
         aboutJMenu.add(accountItem);
 
+        changeImage.add(girl);
+        changeImage.add(animal);
+        changeImage.add(sport);
+
         //将菜单里面的两个选项添加到菜单中
         jMenuBar.add(functionJMenu);
         jMenuBar.add(aboutJMenu);
+
 
         //给整个界面设置菜单
         this.setJMenuBar(jMenuBar);
@@ -148,6 +160,9 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
         reloginItem.addActionListener(this);
         closeItem.addActionListener(this);
         accountItem.addActionListener(this);
+        girl.addActionListener(this);
+        animal.addActionListener(this);
+        sport.addActionListener(this);
     }
 
     private void initJFrame() {
@@ -332,6 +347,29 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
             jDialog.setModal(true);
             //让弹框显示出来
             jDialog.setVisible(true);
+        }else if(obj == girl){
+            Random r = new Random();
+            int index = r.nextInt(13)+1;
+            System.out.println("美女:"+index);
+            path = "puzzlegame\\image\\girl\\girl"+index+"\\";
+            //再次打乱二维数组中的数据
+            initData();
+            initImage();
+        }else if(obj == animal){
+            Random r = new Random();
+            int index = r.nextInt(8)+1;
+            System.out.println("动物:"+index);
+            path = "puzzlegame\\image\\animal\\animal"+index+"\\";
+            //再次打乱二维数组中的数据
+            initData();
+            initImage();
+        }else if(obj == sport){
+            Random r = new Random();
+            int index = r.nextInt(10)+1;
+            path = "puzzlegame\\image\\sport\\sport"+index+"\\";
+            //再次打乱二维数组中的数据
+            initData();
+            initImage();
         }
     }
 }
